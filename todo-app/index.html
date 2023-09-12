@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo app</title>
+  </head>
+  <body>
+    <h1>Todo app</h1>
+    <div>
+      <label for="filter">Filter</label>
+      <input type="text" placeholder="Do work..." name="filter" />
+    </div>
+    <div style="display: flex; gap: 0.5rem; background-color: #f8f8f8">
+      <form
+        class="todo_form"
+        style="
+          display: flex;
+          gap: 0.5rem;
+          border-radius: 0.5rem;
+          max-width: 500px;
+          padding: 1rem;
+        "
+      >
+        <label for="todo">Todo title</label>
+        <input
+          placeholder="Clean the bathroom..."
+          type="text"
+          name="todo"
+          id="todo_input"
+          required
+        />
+
+        <button id="add_new_todo">Add a new todo</button>
+      </form>
+      <div><button id="remove_all_todos">Remove all todos</button></div>
+    </div>
+
+    <h2 id="todo_header">aa</h2>
+    <div class="todo_list"></div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
