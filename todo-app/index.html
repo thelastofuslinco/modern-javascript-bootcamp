@@ -4,41 +4,82 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo app</title>
+    <style>
+      form {
+        display: flex;
+        background-color: #f6f6f6;
+        border-radius: 0.5rem;
+        max-width: 400px;
+        padding: 0.5rem;
+        align-items: center;
+        position: relative;
+      }
+    </style>
   </head>
   <body>
     <h1>Todo app</h1>
-    <div>
-      <label for="filter">Filter</label>
-      <input type="text" placeholder="Do work..." name="filter" />
-    </div>
-    <div style="display: flex; gap: 0.5rem; background-color: #f8f8f8">
-      <form
-        class="todo_form"
-        style="
-          display: flex;
-          gap: 0.5rem;
-          border-radius: 0.5rem;
-          max-width: 500px;
-          padding: 1rem;
-        "
-      >
-        <label for="todo">Todo title</label>
+
+    <div style="display: flex; flex-direction: column; gap: 0.5rem">
+      <form id="filter_form">
+        <label style="position: absolute; top: 0; color: #c9c9c9" for="filter"
+          >Filter</label
+        >
         <input
+          style="flex: 1; height: 30px; border: none; outline: none"
+          placeholder="Do work..."
+          type="text"
+          name="search"
+        />
+        <label>
+          <input
+            type="checkbox"
+            name="check"
+            id="hideCompleted"
+            placeholder="Try me!"
+          />
+          Hide completed
+        </label>
+        <select name="select">
+          <option value="completed">Completed</option>
+          <option value="uncompleted" selected>Uncompleted</option>
+          <option value="title">Title</option>
+          <option value="time">Time</option>
+        </select>
+        <button style="height: 30px; cursor: pointer" id="add_new_filter">
+          apply
+        </button>
+      </form>
+
+      <form id="todo_form">
+        <label style="position: absolute; top: 0; color: #c9c9c9" for="todo"
+          >New todo</label
+        >
+        <input
+          style="flex: 1; height: 30px; border: none; outline: none"
           placeholder="Clean the bathroom..."
           type="text"
           name="todo"
-          id="todo_input"
           required
         />
 
-        <button id="add_new_todo">Add a new todo</button>
+        <button style="height: 30px; cursor: pointer" id="add_new_todo">
+          send
+        </button>
       </form>
-      <div><button id="remove_all_todos">Remove all todos</button></div>
     </div>
 
-    <h2 id="todo_header">aa</h2>
+    <div style="display: flex; gap: 0.5rem; align-items: center">
+      <h2 id="todo_header"></h2>
+      <button
+        id="remove_all_todos"
+        style="height: 50px; border-radius: 0.5rem; background-color: red"
+      >
+        Remove all todos
+      </button>
+    </div>
     <div class="todo_list"></div>
 
-    <script src="index.js"></script>
+    <script src="functions.js"></script>
+    <script src="index.js" type="module"></script>
   </body>
 </html>

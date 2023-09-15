@@ -1,61 +1,60 @@
-let todos = [
-  { title: 'todo #1', completed: true },
-  { title: 'todo #2', completed: true },
-  { title: 'todo #3', completed: false },
-  { title: 'todo #4', completed: false },
-  { title: 'todo #5', completed: false },
-  { title: 'todo #6', completed: true },
-  { title: 'todo #7', completed: true }
-]
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid'
 
-const body = document.querySelector('body')
-const todo_form = document.querySelector('.todo_form')
-const todoListContainer = document.querySelector('.todo_list')
-const header = document.querySelector('#todo_header')
+let todos = getSavedTodos()
 
-const renderHeader = (length) => {
-  header.textContent = `You have ${length} ${
-    length > 1 ? 'todos' : 'todo'
-  } left`
+const filter = {
+  search: '',
+  completed: false,
+  sortBy: ''
 }
 
-const renderTodo = (todo, length) => {
-  const paragraph = document.createElement('p')
+const $todo_form = document.querySelector('#todo_form')
+const $filter_form = document.querySelector('#filter_form')
+const $deleteAllButton = document.querySelector('#remove_all_todos')
 
-  paragraph.textContent = `${todo.title} - ${
-    todo.completed ? 'completed' : 'uncompleted'
-  }`
-  paragraph.style.color = todo.completed ? 'blue' : 'red'
-  paragraph.classList.add('todo')
-
-  todoListContainer.appendChild(paragraph)
-  renderHeader(length)
-}
+renderTodos(todos, filter)
 
 const addNewTodo = (title) => {
-  const todo = { title, completed: false }
+  const todo = {
+    id: uuidv4(),
+    title,
+    completed: false,
+    created_at: new Date().toString()
+  }
   todos.push(todo)
-  renderTodo(todo, todos.length)
-  todo_input.value = ''
+  console.log(todo)
+  saveTodos(todos)
+  renderTodo(todo, todos, filter)
+  renderHeader(todos)
 }
 
-const removeAllTodos = () => {
-  const paragraphs = document.querySelectorAll('.todo')
+$deleteAllButton.addEventListener('click', () => {
   todos = []
-  paragraphs.forEach((paragraph) => paragraph.remove())
-  renderHeader(0)
-}
+  saveTodos(todos)
+  renderTodos(todos, filter)
+})
 
-todos.forEach((todo, index) => renderTodo(todo, index + 1))
-
-todo_form.addEventListener('submit', (event) => {
+$todo_form.addEventListener('submit', (event) => {
   event.preventDefault()
   const { todo } = event.target
 
-  if (event.submitter.id !== 'remove_all_todos') {
-    addNewTodo(todo.value)
-    return
-  }
+  addNewTodo(todo.value)
+  todo.value = ''
+})
 
-  removeAllTodos()
+$filter_form.addEventListener('submit', (event) => {
+  event.preventDefault()
+  const { search, check, select } = event.target
+  filter.search = search.value
+  filter.completed = check.checked
+  filter.sortBy = select.value
+
+  renderTodos(todos, filter)
+})
+
+window.addEventListener('storage', (event) => {
+  if (event.key === 'todos') {
+    todos = JSON.parse(event.newValue)
+    renderTodos(todos, filter)
+  }
 })
