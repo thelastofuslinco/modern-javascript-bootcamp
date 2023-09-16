@@ -8,9 +8,9 @@ const filter = {
   sortBy: ''
 }
 
-const $todo_form = document.querySelector('#todo_form')
-const $filter_form = document.querySelector('#filter_form')
-const $deleteAllButton = document.querySelector('#remove_all_todos')
+const todo_form = document.querySelector('#todo_form')
+const filter_form = document.querySelector('#filter_form')
+const deleteAllButton = document.querySelector('#remove_all_todos')
 
 renderTodos(todos, filter)
 
@@ -19,22 +19,22 @@ const addNewTodo = (title) => {
     id: uuidv4(),
     title,
     completed: false,
-    created_at: new Date().toString()
+    created_at: new Date().toString(),
+    updated_at: new Date().toString()
   }
   todos.push(todo)
-  console.log(todo)
   saveTodos(todos)
   renderTodo(todo, todos, filter)
   renderHeader(todos)
 }
 
-$deleteAllButton.addEventListener('click', () => {
+deleteAllButton.addEventListener('click', () => {
   todos = []
   saveTodos(todos)
   renderTodos(todos, filter)
 })
 
-$todo_form.addEventListener('submit', (event) => {
+todo_form.addEventListener('submit', (event) => {
   event.preventDefault()
   const { todo } = event.target
 
@@ -42,7 +42,7 @@ $todo_form.addEventListener('submit', (event) => {
   todo.value = ''
 })
 
-$filter_form.addEventListener('submit', (event) => {
+filter_form.addEventListener('submit', (event) => {
   event.preventDefault()
   const { search, check, select } = event.target
   filter.search = search.value

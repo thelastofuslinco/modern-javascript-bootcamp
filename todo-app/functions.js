@@ -8,6 +8,35 @@ const getSavedTodos = () => {
   return []
 }
 
+const sortTodos = (a, b, sortBy) => {
+  if (sortBy === 'completed') {
+    return b.completed - a.completed
+  } else if (sortBy === 'uncompleted') {
+    return a.completed - b.completed
+  } else if (sortBy === 'title') {
+    if (a.title < b.title) return -1
+    else if (a.title > b.title) return 1
+    else return 0
+  } else if (sortBy === 'created_at') {
+    return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+  } else if (sortBy === 'updated_at') {
+    return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+  } else {
+    return 0
+  }
+}
+
+const getTime = (time) => {
+  return new Date(time).toLocaleString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    second: '2-digit',
+    year: 'numeric',
+    month: 'long',
+    day: '2-digit'
+  })
+}
+
 const saveTodos = (todos) => {
   localStorage.setItem('todos', JSON.stringify(todos))
 }
@@ -30,7 +59,13 @@ const renderHeader = (todos) => {
 }
 
 const renderTodo = (todo, todos, filter) => {
-  const textElement = document.createElement('span')
+  const url = new URL('/edit.html', document.location)
+  url.searchParams.set('id', todo.id)
+
+  const created_time = getTime(todo.created_at)
+  const updated_time = getTime(todo.updated_at)
+
+  const textElement = document.createElement('a')
   const timeElement = document.createElement('span')
   const button = document.createElement('button')
   const input = document.createElement('input')
@@ -42,11 +77,7 @@ const renderTodo = (todo, todos, filter) => {
   textElement.style.color = todo.completed ? 'blue' : 'red'
   textElement.style.cursor = 'pointer'
 
-  textElement.addEventListener('click', () => {
-    const url = new URL('/edit.html', document.location)
-    url.searchParams.set('id', todo.id)
-    window.location.href = url
-  })
+  textElement.setAttribute('href', url)
 
   button.textContent = 'X'
   button.addEventListener('click', () => {
@@ -63,13 +94,7 @@ const renderTodo = (todo, todos, filter) => {
     renderTodos(todos, filter)
   })
 
-  timeElement.textContent = new Date(todo.created_at).toLocaleString('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
-    year: 'numeric',
-    month: 'long',
-    day: '2-digit'
-  })
+  timeElement.textContent = `Created ${created_time} - Updated ${updated_time}`
 
   div.appendChild(input)
   div.appendChild(textElement)
@@ -89,23 +114,7 @@ const renderTodos = (todos, filter) => {
       const completedMatch = !filter?.completed || !todo.completed
       return searchMatch && completedMatch
     })
-    .sort((a, b) => {
-      if (filter.sortBy === 'completed') {
-        return b.completed - a.completed
-      } else if (filter.sortBy === 'uncompleted') {
-        return a.completed - b.completed
-      } else if (filter.sortBy === 'title') {
-        if (a.title < b.title) return -1
-        else if (a.title > b.title) return 1
-        else return 0
-      } else if (filter.sortBy === 'time') {
-        return (
-          new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
-        )
-      } else {
-        return 0
-      }
-    })
+    .sort((a, b) => sortTodos(a, b, filter.sortBy))
 
   filteredTodos.forEach((todo) => renderTodo(todo, todos, filter))
   renderHeader(todos)

@@ -14,12 +14,13 @@ todo_title.value = todo.title
 
 todo_title.addEventListener('input', (event) => {
   todo.title = event.target.value
+  todo.updated_at = new Date().toString()
   saveTodos(todos)
 })
 
 todo_completed.addEventListener('input', (event) => {
   todo.completed = event.target.checked
-  console.log(todo.completed)
+  todo.updated_at = new Date().toString()
   saveTodos(todos)
 })
 
@@ -30,7 +31,6 @@ delete_todo.addEventListener('click', () => {
 })
 
 window.addEventListener('storage', (event) => {
-  console.log(JSON.parse(event.newValue))
   if (event.key === 'todos') {
     todos = JSON.parse(event.newValue)
     todo = todos.find((todo) => todo.id === id)
