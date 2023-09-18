@@ -1,7 +1,11 @@
 const getSavedTodos = () => {
   const jsonTodos = JSON.parse(localStorage.getItem('todos'))
 
-  return jsonTodos !== null ? jsonTodos : []
+  try {
+    return jsonTodos !== null ? jsonTodos : []
+  } catch (error) {
+    return []
+  }
 }
 
 const sortTodos = (a, b, sortBy) => {
