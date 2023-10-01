@@ -1,25 +1,37 @@
-const wordEl = document.createElement('span')
-const remainingGuessesEl = document.createElement('span')
-const statusEl = document.createElement('span')
 const div = document.createElement('div')
+const wordEl = document.createElement('span')
+const statusEl = document.createElement('span')
+const button = document.createElement('button')
+
+const render_word = (game) => {
+  wordEl.innerHTML = ''
+  game.puzzle.split('').forEach((word) => {
+    const span = document.createElement('span')
+    span.textContent = word
+    wordEl.appendChild(span)
+  })
+  statusEl.textContent = game.status_message
+}
 
 const renderGame = (game) => {
-  wordEl.textContent = game.puzzle
-  remainingGuessesEl.textContent = game.remainingGuesses
-  statusEl.textContent = game.status_message
+  render_word(game)
+  button.textContent = 'reset'
+  button.onclick = start_game
+
+  wordEl.classList.add('word')
+  statusEl.classList.add('status')
+  div.classList.add('game_container')
 
   div.appendChild(wordEl)
-  div.appendChild(remainingGuessesEl)
   div.appendChild(statusEl)
+  div.appendChild(button)
   document.body.appendChild(div)
 }
 
 const play_game = (game, key) => {
   if (game.status === 'playing') {
     game.makeGuess(key)
-    wordEl.textContent = game.puzzle
-    remainingGuessesEl.textContent = game.remainingGuesses
-    statusEl.textContent = game.status_message
+    render_word(game)
   }
 }
 
@@ -27,6 +39,7 @@ const start_game = async () => {
   const response = await new_request.get(
     'https://puzzle.mead.io/puzzle?wordCount=3'
   )
+
   const puzzle = new Hangman(response.puzzle, 3)
 
   renderGame(puzzle)
@@ -50,3 +63,10 @@ start_game()
 // }
 
 // get_location().then(console.log).catch(console.error)
+
+const typewriter_effect = async (current_word) => {
+  for (let i = 0; i < current_word.length; i++) {
+    statusEl.innerHTML = current_word.substring(0, i + 1)
+    await new Promise((resolve) => setTimeout(resolve, 100))
+  }
+}

@@ -4,81 +4,86 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo app</title>
-    <style>
-      form {
-        display: flex;
-        background-color: #f6f6f6;
-        border-radius: 0.5rem;
-        max-width: 400px;
-        padding: 0.5rem;
-        align-items: center;
-        position: relative;
-      }
-    </style>
+
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Todo app</h1>
+    <header class="header">
+      <div class="container">
+        <h1 class="header__title">Todo app</h1>
+        <h2 class="header__subtitle">Create a new todo!</h2>
+      </div>
+    </header>
+    <div class="content_container">
+      <div class="action">
+        <div class="actions__container">
+          <div style="display: flex; flex-direction: column; gap: 0.5rem">
+            <form id="filter_form">
+              <label
+                style="position: absolute; top: 0; color: #c9c9c9"
+                for="filter"
+                >Filter</label
+              >
+              <input
+                style="flex: 1; height: 30px; border: none; outline: none"
+                placeholder="Do work..."
+                type="text"
+                name="search"
+              />
+              <label>
+                <input
+                  type="checkbox"
+                  name="check"
+                  id="hideCompleted"
+                  placeholder="Try me!"
+                />
+                Hide completed
+              </label>
+              <select name="select">
+                <option value="completed">Completed</option>
+                <option value="uncompleted" selected>Uncompleted</option>
+                <option value="title">Title</option>
+                <option value="created_at">Created_at</option>
+                <option value="updated_at">Updated_at</option>
+              </select>
+              <button style="height: 30px; cursor: pointer" id="add_new_filter">
+                apply
+              </button>
+            </form>
 
-    <div style="display: flex; flex-direction: column; gap: 0.5rem">
-      <form id="filter_form">
-        <label style="position: absolute; top: 0; color: #c9c9c9" for="filter"
-          >Filter</label
+            <form id="todo_form">
+              <label
+                style="position: absolute; top: 0; color: #c9c9c9"
+                for="todo"
+                >New todo</label
+              >
+              <input
+                style="flex: 1; height: 30px; border: none; outline: none"
+                placeholder="Clean the bathroom..."
+                type="text"
+                name="todo"
+                required
+              />
+
+              <button style="height: 30px; cursor: pointer" id="add_new_todo">
+                send
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; align-items: center">
+        <h2 id="todo_header"></h2>
+        <button
+          id="remove_all_todos"
+          style="height: 50px; border-radius: 0.5rem; background-color: red"
         >
-        <input
-          style="flex: 1; height: 30px; border: none; outline: none"
-          placeholder="Do work..."
-          type="text"
-          name="search"
-        />
-        <label>
-          <input
-            type="checkbox"
-            name="check"
-            id="hideCompleted"
-            placeholder="Try me!"
-          />
-          Hide completed
-        </label>
-        <select name="select">
-          <option value="completed">Completed</option>
-          <option value="uncompleted" selected>Uncompleted</option>
-          <option value="title">Title</option>
-          <option value="created_at">Created_at</option>
-          <option value="updated_at">Updated_at</option>
-        </select>
-        <button style="height: 30px; cursor: pointer" id="add_new_filter">
-          apply
+          Remove all todos
         </button>
-      </form>
-
-      <form id="todo_form">
-        <label style="position: absolute; top: 0; color: #c9c9c9" for="todo"
-          >New todo</label
-        >
-        <input
-          style="flex: 1; height: 30px; border: none; outline: none"
-          placeholder="Clean the bathroom..."
-          type="text"
-          name="todo"
-          required
-        />
-
-        <button style="height: 30px; cursor: pointer" id="add_new_todo">
-          send
-        </button>
-      </form>
+      </div>
+      <div class="todo_list"></div>
     </div>
-
-    <div style="display: flex; gap: 0.5rem; align-items: center">
-      <h2 id="todo_header"></h2>
-      <button
-        id="remove_all_todos"
-        style="height: 50px; border-radius: 0.5rem; background-color: red"
-      >
-        Remove all todos
-      </button>
-    </div>
-    <div class="todo_list"></div>
 
     <script src="functions.js"></script>
     <script src="index.js" type="module"></script>

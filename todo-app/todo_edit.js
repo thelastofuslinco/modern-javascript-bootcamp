@@ -14,13 +14,13 @@ todo_title.value = todo.title
 
 todo_title.addEventListener('input', (event) => {
   todo.title = event.target.value
-  todo.updated_at = new Date().toString()
+  todo.updated_at = new Date()
   saveTodos(todos)
 })
 
 todo_completed.addEventListener('input', (event) => {
   todo.completed = event.target.checked
-  todo.updated_at = new Date().toString()
+  todo.updated_at = new Date()
   saveTodos(todos)
 })
 

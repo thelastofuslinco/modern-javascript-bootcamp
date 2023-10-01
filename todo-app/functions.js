@@ -18,7 +18,7 @@ const sortTodos = (a, b, sortBy) => {
     else if (a.title > b.title) return 1
     else return 0
   } else if (sortBy === 'created_at') {
-    return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
   } else if (sortBy === 'updated_at') {
     return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
   } else {
@@ -27,14 +27,22 @@ const sortTodos = (a, b, sortBy) => {
 }
 
 const getTime = (time) => {
-  return new Date(time).toLocaleString('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
-    second: '2-digit',
-    year: 'numeric',
-    month: 'long',
-    day: '2-digit'
-  })
+  const date1 = new Date(time)
+  const date2 = new Date()
+  const diff = Math.abs(date2 - date1)
+  const diffTime = {
+    s: Math.floor(diff / 1000),
+    m: Math.floor(diff / (1000 * 60)),
+    h: Math.floor(diff / (1000 * 60 * 60))
+  }
+
+  if (diffTime.h > 1) {
+    return `${diffTime.h} hour ago`
+  } else if (diffTime.m > 1) {
+    return `${diffTime.m} minutes ago`
+  } else {
+    return `${diffTime.s} seconds ago`
+  }
 }
 
 const saveTodos = (todos) => {
@@ -62,7 +70,6 @@ const renderTodo = (todo, todos, filter) => {
   const url = new URL('/edit.html', document.location)
   url.searchParams.set('id', todo.id)
 
-  const created_time = getTime(todo.created_at)
   const updated_time = getTime(todo.updated_at)
 
   const textElement = document.createElement('a')
@@ -94,7 +101,7 @@ const renderTodo = (todo, todos, filter) => {
     renderTodos(todos, filter)
   })
 
-  timeElement.textContent = `Created ${created_time} - Updated ${updated_time}`
+  timeElement.textContent = updated_time
 
   div.appendChild(input)
   div.appendChild(textElement)

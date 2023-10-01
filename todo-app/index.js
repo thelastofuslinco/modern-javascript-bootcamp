@@ -19,8 +19,8 @@ const addNewTodo = (title) => {
     id: uuidv4(),
     title,
     completed: false,
-    created_at: new Date().toString(),
-    updated_at: new Date().toString()
+    created_at: new Date(),
+    updated_at: new Date()
   }
   todos.push(todo)
   saveTodos(todos)
