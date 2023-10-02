@@ -1,3 +1,6 @@
+import Hangman from './2-hangman'
+import new_request from './request'
+// console.log('asdasdd')
 const div = document.createElement('div')
 const wordEl = document.createElement('span')
 const statusEl = document.createElement('span')

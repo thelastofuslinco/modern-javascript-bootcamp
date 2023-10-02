@@ -126,3 +126,12 @@ const renderTodos = (todos, filter) => {
   filteredTodos.forEach((todo) => renderTodo(todo, todos, filter))
   renderHeader(todos)
 }
+
+export {
+  renderTodos,
+  renderTodo,
+  renderHeader,
+  removeTodo,
+  saveTodos,
+  getSavedTodos
+}

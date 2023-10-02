@@ -1,4 +1,12 @@
-import { v4 as uuidv4 } from 'https://jspm.dev/uuid'
+import { v4 } from 'uuid'
+import './styles.css'
+import {
+  getSavedTodos,
+  saveTodos,
+  renderTodo,
+  renderTodos,
+  renderHeader
+} from './functions'
 
 let todos = getSavedTodos()
 
@@ -16,7 +24,7 @@ renderTodos(todos, filter)
 
 const addNewTodo = (title) => {
   const todo = {
-    id: uuidv4(),
+    id: v4(),
     title,
     completed: false,
     created_at: new Date(),

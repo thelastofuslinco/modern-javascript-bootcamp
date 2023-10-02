@@ -26,3 +26,5 @@ const new_request = {
     }
   }
 }
+
+export { new_request as default }

@@ -1,3 +1,4 @@
+import { getSavedTodos, saveTodos, removeTodo } from './functions'
 const urlParams = new URLSearchParams(window.location.search)
 const id = urlParams.get('id')
 let todos = getSavedTodos()
