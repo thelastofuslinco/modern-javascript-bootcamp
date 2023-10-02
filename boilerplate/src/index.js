@@ -1,15 +1,7 @@
-const add = (a, b) => a + b
-console.log(add(2, 2))
+import scream from './scream'
+import square, { add, name } from './utils'
+import printMe from './print'
 
-class User {
-  constructor(name, age) {
-    this.name = name
-    this.age = age
-  }
-
-  get profile() {
-    return this.name
-  }
-}
-
-console.log(new User('Lincoln', 24).profile)
+console.log('index.js', add(2, 2))
+console.log(scream(`aiiiii ${name}`), square(3))
+printMe('New me')

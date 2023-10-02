@@ -1,27 +1,2 @@
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-var add = function add(a, b) {
-  return a + b;
-};
-console.log(add(2, 2));
-var User = /*#__PURE__*/function () {
-  function User(name, age) {
-    _classCallCheck(this, User);
-    this.name = name;
-    this.age = age;
-  }
-  _createClass(User, [{
-    key: "profile",
-    get: function get() {
-      return this.name;
-    }
-  }]);
-  return User;
-}();
-console.log(new User('Lincoln', 24).profile);
+(()=>{"use strict";console.log("utils.js"),console.log("index.js",4),console.log("aiiiii Lincoln".toUpperCase()+"!",3*3),console.log("I get called from print.js!")})();
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnVuZGxlLmpzIiwibWFwcGluZ3MiOiJtQkFBQUEsUUFBUUMsSUFBSSxZQ0laRCxRQUFRQyxJQUFJLFdERlVDLEdDR3RCRixRQUFRQyxJQUFZLGlCQ0xjRSxjQUFnQixJREtMLEtFSjNDSCxRQUFRQyxJQUFJLDhCIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vYm9pbGVycGxhdGUvLi9zcmMvdXRpbHMuanMiLCJ3ZWJwYWNrOi8vYm9pbGVycGxhdGUvLi9zcmMvaW5kZXguanMiLCJ3ZWJwYWNrOi8vYm9pbGVycGxhdGUvLi9zcmMvc2NyZWFtLmpzIiwid2VicGFjazovL2JvaWxlcnBsYXRlLy4vc3JjL3ByaW50LmpzIl0sInNvdXJjZXNDb250ZW50IjpbImNvbnNvbGUubG9nKCd1dGlscy5qcycpXHJcblxyXG5jb25zdCBhZGQgPSAoYSwgYikgPT4gYSArIGJcclxuY29uc3QgbmFtZSA9ICdMaW5jb2xuJ1xyXG5jb25zdCBzcXVhcmUgPSAoeCkgPT4geCAqIHhcclxuXHJcbmV4cG9ydCB7IGFkZCwgbmFtZSwgc3F1YXJlIGFzIGRlZmF1bHQgfVxyXG4iLCJpbXBvcnQgc2NyZWFtIGZyb20gJy4vc2NyZWFtJ1xyXG5pbXBvcnQgc3F1YXJlLCB7IGFkZCwgbmFtZSB9IGZyb20gJy4vdXRpbHMnXHJcbmltcG9ydCBwcmludE1lIGZyb20gJy4vcHJpbnQnXHJcblxyXG5jb25zb2xlLmxvZygnaW5kZXguanMnLCBhZGQoMiwgMikpXHJcbmNvbnNvbGUubG9nKHNjcmVhbShgYWlpaWlpICR7bmFtZX1gKSwgc3F1YXJlKDMpKVxyXG5wcmludE1lKCdOZXcgbWUnKVxyXG4iLCJjb25zdCBzY3JlYW0gPSAoc3RyaW5nKSA9PiBzdHJpbmcudG9VcHBlckNhc2UoKSArICchJ1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgc2NyZWFtXHJcbiIsImV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIHByaW50TWUoKSB7XHJcbiAgY29uc29sZS5sb2coJ0kgZ2V0IGNhbGxlZCBmcm9tIHByaW50LmpzIScpXHJcbn1cclxuIl0sIm5hbWVzIjpbImNvbnNvbGUiLCJsb2ciLCJhIiwidG9VcHBlckNhc2UiXSwic291cmNlUm9vdCI6IiJ9
