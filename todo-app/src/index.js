@@ -1,12 +1,7 @@
 import { v4 } from 'uuid'
 import './styles.css'
-import {
-  getSavedTodos,
-  saveTodos,
-  renderTodo,
-  renderTodos,
-  renderHeader
-} from './functions'
+import { getSavedTodos, saveTodos } from './functions'
+import { renderTodo, renderTodos, renderHeader } from './views'
 
 let todos = getSavedTodos()
 

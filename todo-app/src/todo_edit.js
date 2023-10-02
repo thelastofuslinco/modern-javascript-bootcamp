@@ -3,7 +3,7 @@ const urlParams = new URLSearchParams(window.location.search)
 const id = urlParams.get('id')
 let todos = getSavedTodos()
 let todo = todos.find((todo) => todo.id === id)
-import "./styles.css"
+import './styles.css'
 if (!todo) {
   location.assign('/')
 }

@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const favicon = 'public/icon.jpg'
 
 module.exports = {
   entry: {
@@ -10,7 +11,7 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
-    static: path.resolve(__dirname, './dist'),
+    static: path.resolve(__dirname, 'dist'),
     port: 3000,
     hot: true
   },
@@ -23,18 +24,20 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'edit.html',
       template: 'public/edit.html',
+      favicon,
       chunks: ['edit']
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'public/index.html',
+      favicon,
       chunks: ['index']
     }),
     new MiniCssExtractPlugin()
   ],
   optimization: {
-    minimizer: [new CssMinimizerPlugin()],
-    runtimeChunk: 'single'
+    runtimeChunk: 'single',
+    minimizer: ['...', new CssMinimizerPlugin()]
   },
   module: {
     rules: [
