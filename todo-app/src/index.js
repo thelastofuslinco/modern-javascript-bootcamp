@@ -1,7 +1,6 @@
-import { v4 } from 'uuid'
 import './styles.css'
-import { getSavedTodos, saveTodos } from './functions'
-import { renderTodo, renderTodos, renderHeader } from './views'
+import { getSavedTodos, saveTodos, addNewTodo } from './functions'
+import { renderTodos } from './views'
 
 let todos = getSavedTodos()
 
@@ -17,20 +16,6 @@ const deleteAllButton = document.querySelector('#remove_all_todos')
 
 renderTodos(todos, filter)
 
-const addNewTodo = (title) => {
-  const todo = {
-    id: v4(),
-    title,
-    completed: false,
-    created_at: new Date(),
-    updated_at: new Date()
-  }
-  todos.push(todo)
-  saveTodos(todos)
-  renderTodo(todo, todos, filter)
-  renderHeader(todos)
-}
-
 deleteAllButton.addEventListener('click', () => {
   todos = []
   saveTodos(todos)
@@ -41,7 +26,7 @@ todo_form.addEventListener('submit', (event) => {
   event.preventDefault()
   const { todo } = event.target
 
-  addNewTodo(todo.value)
+  addNewTodo(todo.value, todos, filter)
   todo.value = ''
 })
 

@@ -1,3 +1,6 @@
+import { v4 } from 'uuid'
+import { renderTodo, renderHeader } from './views'
+
 const getSavedTodos = () => {
   const jsonTodos = JSON.parse(localStorage.getItem('todos'))
 
@@ -56,4 +59,18 @@ const removeTodo = (id, todos) => {
   }
 }
 
-export { removeTodo, saveTodos, getSavedTodos, sortTodos, getTime }
+const addNewTodo = (title, todos, filter) => {
+  const todo = {
+    id: v4(),
+    title,
+    completed: false,
+    created_at: new Date(),
+    updated_at: new Date()
+  }
+  todos.push(todo)
+  saveTodos(todos)
+  renderTodo(todo, todos, filter)
+  renderHeader(todos)
+}
+
+export { removeTodo, saveTodos, getSavedTodos, sortTodos, getTime, addNewTodo }
